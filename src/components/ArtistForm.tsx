@@ -1,18 +1,38 @@
 "use client";
 
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useState } from "react";
 
-const schema = yup.object().shape({
+// ✅ Define the TypeScript type for the form data
+type ArtistFormData = {
+  name: string;
+  bio: string;
+  categories: string[];
+  languages: string[];
+  fee: string;
+  location: string;
+};
+
+const schema: yup.ObjectSchema<ArtistFormData> = yup.object({
   name: yup.string().required("Name is required"),
   bio: yup.string().required("Bio is required"),
-  categories: yup.array().min(1, "Select at least one category"),
-  languages: yup.array().min(1, "Select at least one language"),
+  categories: yup
+    .array()
+    .of(yup.string().defined())
+    .min(1, "Select at least one category")
+    .required()
+    .default([]),
+  languages: yup
+    .array()
+    .of(yup.string().defined())
+    .min(1, "Select at least one language")
+    .required()
+    .default([]),
   fee: yup.string().required("Fee is required"),
   location: yup.string().required("Location is required"),
-});
+}) as yup.ObjectSchema<ArtistFormData>;
 
 const categoryOptions = ["Singer", "Dancer", "Speaker", "DJ"];
 const languageOptions = ["Hindi", "English", "Punjabi", "Tamil"];
@@ -22,9 +42,8 @@ export default function ArtistForm() {
   const {
     register,
     handleSubmit,
-    control,
     formState: { errors },
-  } = useForm({
+  } = useForm<ArtistFormData>({
     resolver: yupResolver(schema),
     defaultValues: {
       categories: [],
@@ -34,7 +53,7 @@ export default function ArtistForm() {
 
   const [profileImage, setProfileImage] = useState<File | null>(null);
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: ArtistFormData) => {
     console.log("Submitted Data:", { ...data, profileImage });
     alert("Form submitted! Check console.");
   };
