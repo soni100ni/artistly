@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Sidhu Moosewala",
+    "category": "Singer",
+    "price": "$500 - $1000",
+    "location": "Punjab"
+  },
+  {
+    "name": "Meera Kapoor",
+    "category": "Dancer",
+    "price": "$300 - $700",
+    "location": "Delhi"
+  },
+  {
+    "name": "Karan Joshi",
+    "category": "Speaker",
+    "price": "$400 - $900",
+    "location": "Bangalore"
+  },
+  {
+    "name": "DJ Roxy",
+    "category": "DJ",
+    "price": "$800 - $1200",
+    "location": "Pune"
+  }
+]
