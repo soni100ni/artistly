@@ -49,15 +49,7 @@ artistly/
 ├── public/data/artists.json // Static mock data
 
 
-
 ---
-
-## 📸 Screenshots
-
-_Add screenshots if you wish or skip this section._
-
----
-
 
 
 ## ✅ Features Summary
